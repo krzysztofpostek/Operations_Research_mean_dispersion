@@ -1,0 +1,4 @@
+
+Ordering_LDR_test = reshape(double(full(Ordering_LDR))',[T+1 1 T]);
+ORDERING_DECISIONS = reshape(sum(repmat(Ordering_LDR_test,[1 2^T]).*repmat(Demands_scenarios_best_case,[1 1 T]),1),[2^T T])';
+performance_optval = sum(Demand_probabilities_best_case.*(c'*ORDERING_DECISIONS + sum((repmat(Coefficients_holding,[1 2^T]).*max(x_1+cumsum(ORDERING_DECISIONS - Demands_scenarios_best_case(2:T+1,:),1),0) + repmat(Coefficients_backlogging,[1 2^T]).*max((-x_1-cumsum(ORDERING_DECISIONS - Demands_scenarios_best_case(2:T+1,:),1)),0)),1)));
